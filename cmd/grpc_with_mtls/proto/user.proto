@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/BillyLouis/grpc_with_mtls/cmd/grpc_with_mtls/prot/userpb";
+
+message User {
+  int32 id = 1;
+  string db_name = 2;
+  string db_pin_hash = 3;
+  string db_unshash_pin = 4;
+  string db_email = 5;
+  string card_atr = 6;
+  string serial_number = 7;
+  bool db_user_sign = 8;
+  string created_at = 9;
+}
+
+service UserService {
+  rpc SyncUsers(stream User) returns (stream User);
+}
