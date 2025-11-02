@@ -9,6 +9,7 @@ Specifically, a sample of grpc protocol to use mutual TLS (mTLS) to authenticate
  - Create Docker Network (server container)
  - Create  Server x509 TLS certificates that runs in a Docker container
 #### Docker Network:  as a server container do the followings:
+To Do ...
 ...
 ...
 ...
@@ -104,6 +105,7 @@ ssl-ca = /etc/mysql/certs/ca.pem
 ssl-cert = /etc/mysql/certs/server-cert.pem
 ssl-key = /etc/mysql/certs/server-key.pem
 require_secure_transport = ON
+bind-address = 0.0.0.0
 
 #Step 10: Restart MariaDB:
 sudo systemctl restart mariadb
@@ -111,10 +113,10 @@ sudo systemctl restart mariadb
 
 
 #### Client Certificate creation:
- To do ...
  - Create Docker Network (client container)
  - Create  client x509 TLS certificates that runs in a Docker container
 #### Docker Network:  as a client container do the followings:
+To do ...
 ...
 ...
 ...
@@ -162,6 +164,7 @@ To Do ...
 (After creating the certificates as shown above)
 mysql -u root -p --ssl-ca=/etc/mysql/certs/ca.pem \
   --host=127.0.0.1
+
 
 sudo mysql
 SELECT user, host, plugin FROM mysql.user WHERE user = 'root';
@@ -247,7 +250,7 @@ Both side using Server and Client Authentication, hence mTLS. As shown in the ia
 
 ```
 
-### Output of a client & server mTLS exchange:
+### Output of a client & server mTLS exchange using GRPC:
 ```shell
 When the certificates of verified on both client & server, the connection is established and data exchanges can be done.
 If even one character is changed from the certificates the connection cannot be establish to exchange the secured endpoints.
