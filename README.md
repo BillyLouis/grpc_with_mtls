@@ -6,7 +6,6 @@ Specifically, a sample of grpc protocol to use mutual TLS (mTLS) to authenticate
 # Certificate Creation
 ```shell
 #### Server Certificate Creation:
- To do ...
  - Create Docker Network (server container)
  - Create  Server x509 TLS certificates that runs in a Docker container
 #### Docker Network:  as a server container do the followings:
@@ -225,9 +224,19 @@ mysql -u root -p \
 
 ******** note: replace root with ai_node1 if running the command on the client
 ai_node1 is arbitrary, use your own PC/Host name. ********
-a sample of calling the mariadb server from a client is shown in the image below:
+
+A sample of calling the mariadb server from a client is shown in the image below using
+only one side authentication (the client):
 ```
 ![alt text](images/1cmd_client2server_db_20251031.png)
+
+
+## #####################################################
+```shell
+Both side using Server and Client Authentication, hence mTLS. As shown in the iamge below:
+
+```
+![alt text](images/2cmd_client2server_mtls_20251102_143209.png)
 
 
 ## #####################################################
