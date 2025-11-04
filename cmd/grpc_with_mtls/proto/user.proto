@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/BillyLouis/grpc_with_mtls/cmd/grpc_with_mtls/prot/userpb";
+option go_package = "github.com/BillyLouis/grpc_with_mtls/cmd/grpc_with_mtls/proto/userpb";
 
 message User {
   int32 id = 1;

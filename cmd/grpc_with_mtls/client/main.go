@@ -5,19 +5,18 @@ import (
 	"log"
 	"time"
 
+	userpb "github.com/BillyLouis/grpc_with_mtls/cmd/grpc_with_mtls/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
 	"google.golang.org/grpc/security/advancedtls"
-
-	userpb "github.com/BilyLouis/grpc_with_mtls/cmd/grpc_with_mtls/proto"
 )
 
 const (
 	clientCredRefreshInterval = 1 * time.Minute
-	clientCAPath              = "/etc/all_mycerts/client/ca.pem"
-	clientCertPath            = "/etc/all_mycerts/client/client-cert.pem"
-	clientKeyPath             = "/etc/all_mycerts/client/client-key.pem"
-	grpcServerAddr            = "192.168.0.22:50051"
+	clientCAPath              = "/etc/all_mycerts/mysql/certs/ca/ca.pem"
+	clientCertPath            = "/etc/all_mycerts/mysql/certs/client/client-cert.pem"
+	clientKeyPath             = "/etc/all_mycerts/mysql/certs/client/client-key.pem"
+	grpcServerAddr            = "10.39.8.55:50051"
 )
 
 func createMTLSClientConn() (*grpc.ClientConn, error) {
@@ -63,11 +62,17 @@ func startClientStream(client userpb.UserServiceClient) error {
 	// Send mock data
 	go func() {
 		for {
+			//This should override by server:
 			mockUser := &userpb.User{
-				Id:        1001,
-				DbName:    "client_user",
-				DbEmail:   "user@example.com",
-				CreatedAt: time.Now().Format(time.RFC3339),
+				Id:           1001,
+				DbName:       "client_user",
+				DbPinHash:    "SomeBcryptPasswordHash_48734743",
+				DbUnshashPin: "SomeBcryptReturnCheckHash_7447644",
+				DbEmail:      "user@example.com",
+				CardAtr:      "ATR_32-32-32-32",
+				SerialNumber: "SN:123456",
+				DbUserSign:   false,
+				CreatedAt:    time.Now().Format(time.RFC3339),
 			}
 			if err := stream.Send(mockUser); err != nil {
 				log.Printf("Send error: %v", err)

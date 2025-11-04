@@ -245,8 +245,48 @@ Both side using Server and Client Authentication, hence mTLS. As shown in the ia
 ## #####################################################
 # Proto Buff Creation
 ```shell
- To do ...
- - Install libs/packages to generate protobuff
+#### Install libs/packages to generate protobuff
+move to the project .proto file  (Ex.: ~/my_project/proto/)
+or this PATH in this repo: ~/go/src/github.com/<USER>/grpc_with_mtls/cmd/grpc_with_mtls/proto
+execute the commands:
+# For Debian/Ubuntu
+    sudo apt install -y protobuf-compiler 
+# or For macOS with Homebrew
+    brew install protobuf 
+
+# Plugin
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest 
+    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+
+    export PATH="$PATH:$(go env GOPATH)/bin"
+
+    ####protoc -I=. --go_out=. --go_opt=paths=source_relative user.proto
+    protoc -I=. --go_out=. --go_opt=paths=source_relative \
+  --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+  user.proto
+
+
+#### Basic explanation:
+protoc: The Protocol Buffer compiler executable.
+-I=.: Specifies the directory to search for .proto files.
+
+. indicates the current directory. If your .proto files are in a different location,
+replace "." with the appropriate path (e.g., -I=./proto).
+
+--go_out=.: Instructs protoc to generate Go code and specifies the output directory for the generated Go files.
+The "." means the current directory. You can specify a different directory if needed (e.g., --go_out=./models).
+
+--go_opt=paths=source_relative: This option ensures that the generated Go files
+maintain a relative import path structure, which is often preferred for Go projects.
+
+--go-grpc_out=. --go-grpc_opt=paths=source_relative: Generates the service interface code in user_grpc.pb.go
+
+<user>.proto: The name of the Protocol Buffer definition file. If there are  multiple .proto files
+in the same directory and want to compile all of them, use a wildcard: *.proto.
+
+This command will generate a Go file named ***your_file.pb.go*** in the specified output directory,
+containing the Go structs and methods corresponding to your Protocol Buffer messages.
 
 ```
 

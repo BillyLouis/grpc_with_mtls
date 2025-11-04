@@ -9,13 +9,13 @@ import (
 	"google.golang.org/grpc/credentials/tls/certprovider/pemfile"
 	"google.golang.org/grpc/security/advancedtls"
 
-	userpb "github.com/BilyLouis/grpc_with_mtls/cmd/grpc_with_mtls/proto"
+	userpb "github.com/BillyLouis/grpc_with_mtls/cmd/grpc_with_mtls/proto"
 )
 
 const (
-	serverCertPath    = "/etc/all_mycerts/server/server-cert.pem"
-	serverKeyPath     = "/etc/all_mycerts/server/server-key.pem"
-	serverCAPath      = "/etc/all_mycerts/server/ca.pem"
+	serverCertPath    = "/etc/mysql/certs/server-cert.pem"
+	serverKeyPath     = "/etc/mysql/certs/server-key.pem"
+	serverCAPath      = "/etc/mysql/certs/ca.pem"
 	serverCredRefresh = 1 * time.Minute
 	serverListenAddr  = ":50051"
 )
