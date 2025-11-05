@@ -294,13 +294,14 @@ containing the Go structs and methods corresponding to your Protocol Buffer mess
 ```shell
 When the certificates of verified on both client & server, the connection is established and data exchanges can be done.
 If even one character is changed from the certificates the connection cannot be establish to exchange the secured endpoints.
-As shown in  the image below:
 
-![alt text (TODO: image not ready)]
-
+In the image below there are 2 terminals, the client on the right and the server on the left 
+which show a bidirectional streeming exchange.
 ```
+![alt text](images/3cmd_client2server_mtls_grpc_20251102_143209.png)
 
 
+## #####################################################
 # Authors
 - [Billy Louis](): TCP/IP connection between Client and Server using Golang RPC (GRPC)
 
